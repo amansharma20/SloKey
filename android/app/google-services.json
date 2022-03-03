@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "238076210739",
+    "project_id": "slo-key",
+    "storage_bucket": "slo-key.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238076210739:android:3b995cdb964e1efeb2fd46",
+        "android_client_info": {
+          "package_name": "rainreal.moneykey.casinoglass.pokiesmodel.onlinetime.gamesstreet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238076210739-fn6baltn7q73ee7v0tjm4lkjbooeksnk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3paf6LHhU9FTM9h8enCqK_Gjgz70JdKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "238076210739-fn6baltn7q73ee7v0tjm4lkjbooeksnk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
