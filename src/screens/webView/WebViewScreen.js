@@ -8,6 +8,11 @@ import {getModel, getUniqueId} from 'react-native-device-info';
 import * as RNLocalize from 'react-native-localize';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/core';
+import DeviceCountry, {
+  TYPE_ANY,
+  TYPE_TELEPHONY,
+  TYPE_CONFIGURATION,
+} from 'react-native-device-country';
 
 const WebViewScreen = ({value}) => {
   const [webViewUrl, setWebViewUrl] = useState();
@@ -19,6 +24,7 @@ const WebViewScreen = ({value}) => {
   const propValue = value;
   const [isLoading, setIsLoading] = useState(false);
   const [apiUrl, setApiUrl] = useState();
+  console.log('apiUrl :', apiUrl);
 
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   useEffect(() => {
@@ -41,6 +47,18 @@ const WebViewScreen = ({value}) => {
     };
   }, []);
 
+  const [countryCode, setCountryCode] = useState();
+  console.log('countryCode :', countryCode);
+
+  DeviceCountry.getCountryCode(TYPE_TELEPHONY)
+    .then(result => {
+      console.log('result :', result);
+      setCountryCode(result.code);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+
   useEffect(() => {
     async function getLinkLocal() {
       const model = await getModel();
@@ -49,7 +67,9 @@ const WebViewScreen = ({value}) => {
 
       const androidId = await getUniqueId();
 
-      const tempUrl = value + '?' + model + '?' + geo + '?' + androidId;
+      // const tempUrl = value + '?' + model + '?' + geo + '?' + androidId;
+      const tempUrl = value + '?' + model + '?' + countryCode + '?' + androidId;
+
       console.log('tempUrl :', tempUrl);
       setApiUrl(tempUrl);
     }
@@ -57,7 +77,7 @@ const WebViewScreen = ({value}) => {
       getLinkLocal();
     }
     console.log('error');
-  }, [propValue]);
+  }, [propValue, countryCode]);
 
   useEffect(() => {
     const fetchApiData = async () => {
@@ -75,19 +95,6 @@ const WebViewScreen = ({value}) => {
               ? navigation.navigate('HomeScreen')
               : console.log('webViewUrl is not null');
           }
-
-          // if (response.data.banner_url == null) {
-          //   console.log('homehomehomehome');
-          //   console.log('response.data.banner_url :', response.data.banner_url);
-          //   console.log('webViewUrl in :', webViewUrl);
-          //   navigation.navigate('HomeScreen');
-          // }
-
-          // if (webViewUrl == null) {
-          //   console.log('homehomehomehome');
-          //   console.log('webViewUrl in :', webViewUrl);
-          //   navigation.navigate('HomeScreen');
-          // }
         }
       } catch (error) {
         if (axios.isCancel(error)) {
