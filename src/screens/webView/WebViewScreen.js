@@ -68,7 +68,19 @@ const WebViewScreen = ({value}) => {
       const androidId = await getUniqueId();
 
       // const tempUrl = value + '?' + model + '?' + geo + '?' + androidId;
-      const tempUrl = value + '?' + model + '?' + countryCode + '?' + androidId;
+      // const tempUrl = value + '?' + model + '?' + countryCode + '?' + androidId;
+
+      const tempUrl =
+        value +
+        '?' +
+        `device=` +
+        model +
+        '&' +
+        `country=` +
+        countryCode +
+        '&' +
+        `bid=` +
+        androidId;
 
       console.log('tempUrl :', tempUrl);
       setApiUrl(tempUrl);
